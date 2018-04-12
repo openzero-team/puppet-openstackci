@@ -195,15 +195,16 @@ class openstackci::logserver (
     source => 'puppet:///modules/openstackci/log_archive_maintenance.sh',
   }
 
-  cron { 'gziprmlogs':
-    user        => 'root',
-    minute      => '0',
-    hour        => '7',
-    weekday     => '6',
-    command     => 'bash /usr/local/sbin/log_archive_maintenance.sh',
-    environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
-    require     => File['/usr/local/sbin/log_archive_maintenance.sh'],
-  }
+# NOTE(yujunz): disabled to keep html preview link
+  # cron { 'gziprmlogs':
+  #   user        => 'root',
+  #   minute      => '0',
+  #   hour        => '7',
+  #   weekday     => '6',
+  #   command     => 'bash /usr/local/sbin/log_archive_maintenance.sh',
+  #   environment => 'PATH=/usr/bin:/bin:/usr/sbin:/sbin',
+  #   require     => File['/usr/local/sbin/log_archive_maintenance.sh'],
+  # }
 
   if $ara_middleware {
     package { 'ara':
